@@ -1,2 +1,2 @@
 # President-Java
-"President" network game in Java
+"President" - Network game in Java
