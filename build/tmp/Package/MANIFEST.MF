@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Title: Server creation
+Implementation-Version: 
+Main-Class: server.SecureChatServer
+

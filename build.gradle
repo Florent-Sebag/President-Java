@@ -1,0 +1,48 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+version = ''
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+//create a single Jar with all dependencies
+
+task client(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'Client creation',
+        	'Implementation-Version': version,
+        	'Main-Class': 'client.SecureChatClient'
+    }
+		destinationDir = file("$rootDir/target")
+    baseName = 'jcoinche-client'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task Package(type: Jar, dependsOn: 'client') {
+	manifest {
+        attributes 'Implementation-Title': 'Server creation',
+        	'Implementation-Version': version,
+        	'Main-Class': 'server.SecureChatServer'
+    }
+		destinationDir = file("$rootDir/target")
+    baseName = 'jcoinche-server'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+//Get dependencies from Maven central repository
+repositories {
+    mavenCentral()
+}
+
+//Project dependencies
+dependencies {
+    testCompile (
+            [group: 'junit', name: 'junit', version: '4.12']
+    )
+
+    compile (
+            [group: 'io.netty', name: 'netty-all', version: '4.1.17.Final']
+    )
+}

@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Title: Client creation
+Implementation-Version: 
+Main-Class: client.SecureChatClient
+
